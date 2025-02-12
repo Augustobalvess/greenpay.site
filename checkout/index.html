@@ -12,35 +12,39 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 111vh;
-            margin: -0;
+            height: 15
+        0vh;
+            margin: 0;
         }
         .container {
             background: white;
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 360px;
+            width: 350px;
         }
         h2 {
             margin-bottom: 20px;
+            font-size: 1.5em; /* Tamanho do título */
         }
         input {
-            width: 90%;
-            padding: 10px;
+            width: 100%;
+            padding: 8px; /* Reduzi o padding */
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 1.0em; /* Tamanho do texto nos campos */
         }
         button {
             background: #28a745;
             color: white;
             border: none;
-            padding: 15px;
-            width: 100%;
+            padding: 12px; /* Reduzi o padding */
+            width: 105%;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 1em; /* Tamanho do texto no botão */
         }
         button:hover {
             background: #218838;
@@ -49,6 +53,12 @@
             max-width: 100%;
             height: auto;
             margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 5px 0;
+            font-size: 0em; /* Tamanho do texto nos rótulos */
         }
     </style>
     <script>
@@ -60,31 +70,46 @@
 </head>
 <body>
     <nav class="navbar" style="padding-top: 20px;">
-      <div class="menu-icon" style="padding-left: -5%;">
-        <img fetchpriority="high" decoding="async" width="420" height="126" src="images/7tYoRmTkKwTC.webp" alt="np">
-      </div>
-      <div class="logo-central"></div>
-      <div class="menu-icon" style="padding-right: -5%;">
+        <div class="menu-icon" style="padding-left: -5%;">
+            <img fetchpriority="high" decoding="async" width="420" height="126" src="images/7tYoRmTkKwTC.webp" alt="np">
+        </div>
+        <div class="logo-central"></div>
+        <div class="menu-icon" style="padding-right: -5%;"></div>
     </nav>
-  
+
     <div class="container">
         <h2></h2>
-   <form action="#" method="POST" onsubmit="redirecionar(event)">
-            <input type="text" name="nombre" placeholder="Su nombre" required>
-            <input type="tel" name="teléfono" placeholder="
-Tu teléfono" required>
+        <form action="#" method="POST" onsubmit="redirecionar(event)">
+            <label>Su nombre</label>
+            <input type="text" name="nombre" placeholder="
+Su nombre" required>
+
+            <label>Tu teléfono</label>
+            <input type="tel" name="teléfono" placeholder="Tu teléfono" required>
+
+            <label>Estado</label>
             <input type="text" name="estado" placeholder="Estado" required>
+
+            <label>Ciudad</label>
             <input type="text" name="ciudad" placeholder="Ciudad" required>
-            <input type="text" name="vecindario" placeholder="
-Vecindario" required>
-            <input type="text" name="camino" placeholder="
-Camino" required>
-            <input type="text" name="numero" placeholder="Número da Casa" required>
-            <input type="text" name="punto_de_referencia" placeholder="punto de referencia">
+
+            <label>Vecindario</label>
+            <input type="text" name="vecindario" placeholder="Vecindario" required>
+
+            <label>Camino</label>
+            <input type="text" name="camino" placeholder="Camino" required>
+
+            <label>Número da Casa</label>
+            <input type="text" name="numero" placeholder="Número da casa" required>
+
+            <label>Punto de referencia</label>
+            <input type="text" name="punto_de_referencia" placeholder="
+Punto de referencia">
+
             <button type="submit">Continuar</button>
         </form>
     </div>
+
+    <img src="images/imagens.jpg" width="390" height="250" alt="Imagem banner" class="banner">
 </body>
 </html>
-
-<img src="images/imagens.jpg" width="390" height="250">
